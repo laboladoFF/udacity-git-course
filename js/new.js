@@ -23,6 +23,7 @@ function openTheCard(e){
 function addCardToOpenCards(e){
   cardsOpened.push(e.children[0].className);
   //var iCard = e.getElementsByTagName('i')[0];
+  //通过点击e获取i元素，与cardsOpened【】元素进行对比
   console.log(e.getElementsByTagName('i')[0]);
   //console.log(cardsOpened);
   if(cardsOpened.length >= 2){
