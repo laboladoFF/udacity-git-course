@@ -24,13 +24,11 @@ function addCardToOpenCards(e){
   cardsOpened.push(e.children[0].className);
   var iCard = e.getElementsByTagName('i')[0];
   //通过点击e获取i元素，与cardsOpened【】元素进行对比
-  console.log(iCard.className);
-  //console.log(cardsOpened);
   if(cardsOpened.length >= 2){
     console.log('>2');
-    //console.log(cardsOpened);
-    //cardsOpened.splice(0,2);
-    if（cardsOpened[0] == iCard.class）{
+    //cardsOpened.splice(0,2);\
+    console.log(iCard.className + cardsOpened);
+    if（cardsOpened[0] == iCard.classname）{
       console.log('match');
     }else{
       console.log('nomatch');
