@@ -22,10 +22,13 @@ function openTheCard(e){
 //建立打开卡片组
 function addCardToOpenCards(e){
   cardsOpened.push(e.children[0].className);
+  //var iCard = e.getElementsByTagName('i')[0];
+  console.log(e.getElementsByTagName('i')[0]);
   //console.log(cardsOpened);
-  if(cardsOpened.length > 2){
+  if(cardsOpened.length >= 2){
     console.log('>2');
-    //console.log(cardsOpened[0]);
+    //console.log(cardsOpened);
+    //cardsOpened.splice(0,2);
   }else{
     console.log('<2');
   }
