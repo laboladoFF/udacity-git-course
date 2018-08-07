@@ -22,14 +22,19 @@ function openTheCard(e){
 //建立打开卡片组
 function addCardToOpenCards(e){
   cardsOpened.push(e.children[0].className);
-  //var iCard = e.getElementsByTagName('i')[0];
+  var iCard = e.getElementsByTagName('i')[0];
   //通过点击e获取i元素，与cardsOpened【】元素进行对比
-  console.log(e.getElementsByTagName('i')[0]);
+  console.log(iCard.className);
   //console.log(cardsOpened);
   if(cardsOpened.length >= 2){
     console.log('>2');
     //console.log(cardsOpened);
     //cardsOpened.splice(0,2);
+    if（cardsOpened[0] == iCard.class）{
+      console.log('match');
+    }else{
+      console.log('nomatch');
+    }
   }else{
     console.log('<2');
   }
