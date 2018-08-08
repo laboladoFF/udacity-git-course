@@ -48,10 +48,18 @@ function addCardToMatchedCards(x,y){
   matchedCards.push(x,y);
   x.classList.add('match');
   y.classList.add('match');
+  Congratulations(matchedCards);
 }
 function hideCardSymbol(x,y){
   x.classList.remove('open','show');
   y.classList.remove('open','show');
 }
+
+function Congratulations(e){
+  if(e.length >= 16){
+    alert("恭喜");
+  }
+}
+
 console.log(matchedCards);
 // matchedCards = [] 等于16时，移除点击事件
