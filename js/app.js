@@ -15,6 +15,7 @@ var deck = document.querySelector('.deck');
 var cards = document.getElementsByClassName('card');
 var cardsOpened = [];
 var matchedCards = [];
+var wrongCards = [];
 /*
  * 显示页面上的卡片
  *   - 使用下面提供的 "shuffle" 方法对数组中的卡片进行洗牌
@@ -81,6 +82,15 @@ function shuffle(array) {
      }else{
        console.log('nomatch');
        hideCardSymbol(e, cardsOpened[0].parentNode);
+       wrongCards.push(e, cardsOpened[0].parentNode);
+       //hideCardSymbol(e, cardsOpened[0].parentNode);
+        setTimeout(function(){
+          console.log(wrongCards[0],wrongCards[1]);
+          wrongCard(wrongCards[0],wrongCards[1]);
+          wrongCards.splice(0,2);
+        },500)
+        //console.log(wrongCards[0].className,wrongCards[1].className);
+        //wrongCards.splice(0,2);
      }
      cardsOpened.splice(0,2);
    }else{
@@ -97,6 +107,14 @@ function shuffle(array) {
    setTimeout(function(){
      Congratulations(matchedCards);
    }, 500);
+ }
+ function wrongCard(x,y){
+   x.classList.add('nomatch');
+   y.classList.add('nomatch');
+   setTimeout(function(){
+     x.classList.remove('nomatch');
+     y.classList.remove('nomatch');
+   }, 1000);
  }
  function hideCardSymbol(x,y){
    x.classList.remove('open','show');
