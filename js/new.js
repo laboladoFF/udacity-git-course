@@ -25,14 +25,15 @@ function addCardToOpenCards(e){
   var iCard = e.getElementsByTagName('i')[0];
   //通过点击e获取i元素，与cardsOpened【】元素进行对比
   if(cardsOpened.length >= 2){
-    console.log('>2');
-    //cardsOpened.splice(0,2);\
-    console.log(iCard.className + cardsOpened);
-    if（cardsOpened[0] == iCard.classname）{
+    //console.log('>2');
+    //console.log(iCard.className + cardsOpened);
+    if(cardsOpened[0] == iCard.className){
       console.log('match');
+      console.log(cardsOpened[0], cardsOpened[1]);
     }else{
       console.log('nomatch');
     }
+    cardsOpened.splice(0,2);
   }else{
     console.log('<2');
   }
