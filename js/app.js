@@ -80,7 +80,7 @@ function shuffle(array) {
        //console.log(e, iCard.parentNode);
      }else{
        console.log('nomatch');
-       setTimeout(hideCardSymbol(e, cardsOpened[0].parentNode), 50000);
+       hideCardSymbol(e, cardsOpened[0].parentNode);
      }
      cardsOpened.splice(0,2);
    }else{
@@ -94,7 +94,9 @@ function shuffle(array) {
    matchedCards.push(x,y);
    x.classList.add('match');
    y.classList.add('match');
-   Congratulations(matchedCards);
+   setTimeout(function(){
+     Congratulations(matchedCards);
+   }, 500);
  }
  function hideCardSymbol(x,y){
    x.classList.remove('open','show');
@@ -106,3 +108,9 @@ function shuffle(array) {
      alert("恭喜");
    }
  }
+//计时器
+var t = document.getElementsByClassName('timer');
+function timeSum(){
+  var count = 0;
+  count += 1;
+}
