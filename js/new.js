@@ -4,6 +4,7 @@ var cardsOpened = [];
 var matchedCards = [];
 
 deck.addEventListener('click', function(event){
+  var event = event || window.event;
   var target = event.target || event.srcElement;
   console.log('o');
   if(target.className.toLowerCase() == 'card'){
@@ -47,9 +48,10 @@ function addCardToMatchedCards(x,y){
   matchedCards.push(x,y);
   x.classList.add('match');
   y.classList.add('match');
-  console.log(matchedCards);
 }
 function hideCardSymbol(x,y){
   x.classList.remove('open','show');
   y.classList.remove('open','show');
 }
+console.log(matchedCards);
+// matchedCards = [] 等于16时，移除点击事件
