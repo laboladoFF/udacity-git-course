@@ -49,13 +49,24 @@ function shuffle(array) {
  *    + 增加移动计数器并将其显示在页面上（将这个功能放在你从这个函数中调用的另一个函数中）
  *    + 如果所有卡都匹配，则显示带有最终分数的消息（将这个功能放在你从这个函数中调用的另一个函数中）
  */
+ // var container = document.getElementsByClassName('container');
+ //
+ // var count = 0;
+ // var t = document.getElementsByClassName('timer');
+ // var timeCount = t[0].getElementsByTagName('span');
+ // function timeSum(){
+ //   Count += 1;
+ //   timeCount[0].textContent = count;
+ //   console.log(timeCount[0].textContent);
+ // }
+
 
  deck.addEventListener('click', function(event){
    var event = event || window.event;
    var target = event.target || event.srcElement;
    console.log('o');
+   clickSum();
    if(target.className.toLowerCase() == 'card'){
-   //console.log(target.children[0].className);
    openTheCard(target) ;
    }
  });
@@ -73,26 +84,19 @@ function shuffle(array) {
    var iCard = e.getElementsByTagName('i')[0];
    //通过点击e获取i元素，与cardsOpened【】元素进行对比
    if(cardsOpened.length >= 2){
-     //console.log('>2');
-     //console.log(iCard.className + cardsOpened);
      if(cardsOpened[0].className == iCard.className){
        console.log('match');
        addCardToMatchedCards(e, cardsOpened[0].parentNode);
-       //console.log(e, iCard.parentNode);
      }else{
        console.log('nomatch');
-       hideCardSymbol(e, cardsOpened[0].parentNode);
        wrongCards.push(e, cardsOpened[0].parentNode);
-       //hideCardSymbol(e, cardsOpened[0].parentNode);
-        setTimeout(function(){
-          console.log(wrongCards[0],wrongCards[1]);
-          wrongCard(wrongCards[0],wrongCards[1]);
-          wrongCards.splice(0,2);
-        },500)
-        //console.log(wrongCards[0].className,wrongCards[1].className);
-        //wrongCards.splice(0,2);
+       wrongCard(wrongCards[0],wrongCards[1]);
+       wrongCards.splice(0,2);
+       setTimeout(function(){
+         hideCardSymbol(e, cardsOpened[0].parentNode);
+         cardsOpened.splice(0,2);
+       },1000)
      }
-     cardsOpened.splice(0,2);
    }else{
      console.log('<2');
    }
@@ -111,6 +115,7 @@ function shuffle(array) {
  function wrongCard(x,y){
    x.classList.add('nomatch');
    y.classList.add('nomatch');
+   console.log(x,y);
    setTimeout(function(){
      x.classList.remove('nomatch');
      y.classList.remove('nomatch');
@@ -127,8 +132,10 @@ function shuffle(array) {
    }
  }
 //计时器
-var t = document.getElementsByClassName('timer');
-function timeSum(){
-  var count = 0;
-  count += 1;
+
+var clickCount = 0;
+//click次数
+function clickSum(){
+  clickCount += 1;
+  console.log(clickCount);
 }

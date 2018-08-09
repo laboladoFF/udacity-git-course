@@ -81,9 +81,9 @@ h1 {
     font-size: 33px;
 }
 
-.desk .card .nomatch {
+.deck .card.nomatch {
     background: #FF0033;
-    font-size: 33px;
+    /* font-size: 33px; */
 }
 
 /*
@@ -106,6 +106,12 @@ h1 {
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+}
+
+.score-panel .timer{
+    widrh: 50px;
+    display: inline-block;
+    margin-left: 50px;
 }
 
 .score-panel .restart {
