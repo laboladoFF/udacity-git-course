@@ -1,6 +1,7 @@
 /*
  * 创建一个包含所有卡片的数组
  */
+window.onload=function(){
 var cardPattern = [
   "fa fa-diamond","fa fa-paper-plane-o",
   "fa fa-anchor","fa fa-bolt",
@@ -51,7 +52,7 @@ function shuffle(array) {
  */
 
 //绑定点击事件
-window.onload=function(){
+
 
  deck.addEventListener('click', function(event){
    var event = event || window.event;
@@ -60,30 +61,25 @@ window.onload=function(){
    clickSum();
    if(target.className.toLowerCase() == 'card'){
    openTheCard(target) ;
-   }
+ }
  });
  // 记录鼠标点击次数
  var clickCount = 0;
  function clickSum(){
-   clickCount += 1;
-   console.log(clickCount);
+   clickCount ++;
  }
-
  //计时器
- var container = document.getElementsByClassName('container');
- var count = 0;
- var t = document.getElementsByClassName('timer');
- var timeCount = t[0].getElementsByTagName('span');
- function timeBegin(){
-   if(clickCount == 1){
-     setInterval(timeSum, 1000);
-   }
- }
- function timeSum(){
-   Count ++;
-   timeCount[0].textContent = count;
-   console.log(timeCount[0].textContent);
- }
+ var timer = document.getElementsByClassName('timer');
+ // function timeBegin(e){
+ //   if(e === 1){
+ //     setInterval(timeSum, 1000);
+ //   }
+ // }
+ // function timeSum(){
+ //   Count ++;
+ //   timeCount[0].textContent = count;
+ //   console.log(timeCount[0].textContent);
+ // }
 
  //打开卡片
  function openTheCard(e){
@@ -93,6 +89,7 @@ window.onload=function(){
        e.classList.add('open','show');
      }
  }
+
  //建立打开卡片组&检查图案是否一致
  function addCardToOpenCards(e){
    cardsOpened.push(e.children[0]);
