@@ -1,7 +1,7 @@
 /*
  * 创建一个包含所有卡片的数组
  */
-window.onload=function(){
+//window.onload=function(){
 var cardPattern = [
   "fa fa-diamond","fa fa-paper-plane-o",
   "fa fa-anchor","fa fa-bolt",
@@ -54,100 +54,124 @@ function shuffle(array) {
 //绑定点击事件
 
 
- deck.addEventListener('click', function(event){
-   var event = event || window.event;
-   var target = event.target || event.srcElement;
-   console.log('o');
-   clickSum();
-   if(target.className.toLowerCase() == 'card'){
-   openTheCard(target) ;
- }
- });
+deck.addEventListener('click', function(event){
+    var event = event || window.event;
+    var target = event.target || event.srcElement;
+    console.log('o');
+    clickSum();
+    if(target.className.toLowerCase() == 'card'){
+      openTheCard(target) ;
+    }
+});
  // 记录鼠标点击次数
- var clickCount = 0;
- function clickSum(){
-   clickCount ++;
- }
+var clickCount = 0;
+function clickSum(){
+    clickCount ++;
+    timeBegin(clickCount);
+    console.log(clickCount);
+}
  //计时器
- var timer = document.getElementsByClassName('timer');
- // function timeBegin(e){
- //   if(e === 1){
- //     setInterval(timeSum, 1000);
- //   }
- // }
- // function timeSum(){
- //   Count ++;
- //   timeCount[0].textContent = count;
- //   console.log(timeCount[0].textContent);
- // }
+var second = 0;
+var hour = 0;
+var minute = 0;
+var timer = document.getElementsByClassName('timer')[0];
+var timeCount = timer.getElementsByTagName('span')[0];
+function timeBegin(e){
+    if(e === 1){
+      setInterval(timeSum, 1000);
+    }
+}
+function timeSum(){
+    second ++;
+      if(second >= 60){
+        second = 0;
+        minute += 1;
+      }
+      if(minute >= 60){
+        minute = 0;
+        hour += 1;
+      }
+    timeCount.textContent =`${hour} 时 ${minute} 分 ${second} 秒`;
+    return;
+  }
 
  //打开卡片
- function openTheCard(e){
-     if(e.className = "card open show"){//一个等号。两个等号无效
-       addCardToOpenCards(e)
-     }else{
-       e.classList.add('open','show');
-     }
- }
+function openTheCard(e){
+    if(e.className = "card open show"){//一个等号。两个等号无效
+      addCardToOpenCards(e)
+    }else{
+      e.classList.add('open','show');
+    }
+}
 
  //建立打开卡片组&检查图案是否一致
- function addCardToOpenCards(e){
-   cardsOpened.push(e.children[0]);
-   var iCard = e.getElementsByTagName('i')[0];
-   //通过点击e获取i元素，与cardsOpened【】元素进行对比
-   if(cardsOpened.length >= 2){
-     if(cardsOpened[0].className == iCard.className){
-       console.log('match');
-       addCardToMatchedCards(e, cardsOpened[0].parentNode);
-     }else{
-       console.log('nomatch');
-       wrongCards.push(e, cardsOpened[0].parentNode);
-       wrongCard(wrongCards[0],wrongCards[1]);
-       wrongCards.splice(0,2);
-     }
-     setTimeout(function(){
-       hideCardSymbol(e, cardsOpened[0].parentNode);
-       cardsOpened.splice(0,2);
-     },800)
-     // 延迟函数对于匹配好的卡片，如果用户快速点击会出现错误
-   }else{
-     console.log('<2');
-   }
- }
+function addCardToOpenCards(e){
+    cardsOpened.push(e.children[0]);
+    var iCard = e.getElementsByTagName('i')[0];
+     //通过点击e获取i元素，与cardsOpened【】元素进行对比
+    if(cardsOpened.length >= 2){
+      if(cardsOpened[0].className == iCard.className){
+        console.log('match');
+        addCardToMatchedCards(e, cardsOpened[0].parentNode);
+      }else{
+        console.log('nomatch');
+        wrongCards.push(e, cardsOpened[0].parentNode);
+        wrongCard(wrongCards[0],wrongCards[1]);
+        wrongCards.splice(0,2);
+      }
+      setTimeout(function(){
+        hideCardSymbol(e, cardsOpened[0].parentNode);
+        cardsOpened.splice(0,2);
+      },800)
+// 延迟函数对于匹配好的卡片，如果用户快速点击会出现错误
+    }else{
+      console.log('<2');
+    }
+}
  //对children[0],children[1]classname
  //对比成功元素添加match，并添加到marchedCards数组中
  //对比失败元素去掉样式open、show
- function addCardToMatchedCards(x,y){
-   matchedCards.push(x,y);
-   x.classList.add('match');
-   y.classList.add('match');
-   setTimeout(function(){
+function addCardToMatchedCards(x,y){
+    matchedCards.push(x,y);
+    x.classList.add('match');
+    y.classList.add('match');
+    setTimeout(function(){
      Congratulations(matchedCards);
-   }, 100);
- }
+    }, 100);
+}
 
  //没有匹配成功的卡片添加和删除样式
- function wrongCard(x,y){
-   x.classList.add('nomatch');
-   y.classList.add('nomatch');
-   console.log(x,y);
-   setTimeout(function(){
-     x.classList.remove('nomatch');
-     y.classList.remove('nomatch');
-   }, 800);
- }
+function wrongCard(x,y){
+    x.classList.add('nomatch');
+    y.classList.add('nomatch');
+    console.log(x,y);
+    setTimeout(function(){
+      x.classList.remove('nomatch');
+      y.classList.remove('nomatch');
+    }, 800);
+}
 
  //没有匹配成功的卡片去掉open样式
- function hideCardSymbol(x,y){
-   x.classList.remove('open','show');
-   y.classList.remove('open','show');
- }
+function hideCardSymbol(x,y){
+    x.classList.remove('open','show');
+    y.classList.remove('open','show');
+}
 
 //全部卡片匹配成功后弹出的对话框
- function Congratulations(e){
-   if(e.length >= 16){
-     clickCount = 0;
-     alert("恭喜");
-   }
- }
+function Congratulations(e){
+    if(e.length >= 16){
+      alert("恭喜");
+    }
 }
+
+//重置
+var restart = document.getElementsByClassName('restart')[0];
+restart.addEventListener(`click`,function(event){
+  var event = event || window.event;
+  second = 0;//重置后显示为1
+  hour = 0;
+  minute = 0;
+  clickCount = 0;
+}
+)
+//}
