@@ -79,12 +79,89 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    animation:swing 0.8s;
+    -moz-animation:swing 0.8s; /* Firefox */
+    -webkit-animation:swing 0.8s; /* Safari and Chrome */
+    -o-animation:swing 0.8s; /* Opera */
 }
 
 .deck .card.nomatch {
     background: #FF0033;
     /* font-size: 33px; */
+    animation:swing 0.8s;
+    -moz-animation:swing 0.8s; /* Firefox */
+    -webkit-animation:swing 0.8s; /* Safari and Chrome */
+    -o-animation:swing 0.8s; /* Opera */
 }
+/*活动摇摆动画*/
+    @-webkit-keyframes swing {
+    10% {
+      transform: rotate(15deg);
+    }
+    20% {
+      transform: rotate(-10deg);
+    }
+    30% {
+      transform: rotate(5deg);
+    }
+    40% {
+      transform: rotate(-5deg);
+    }
+    50%,100% {
+      transform: rotate(0deg);
+    }
+    }
+    @-moz-keyframes swing {
+    10% {
+      transform: rotate(15deg);
+    }
+    20% {
+      transform: rotate(-10deg);
+    }
+    30% {
+      transform: rotate(5deg);
+    }
+    40% {
+      transform: rotate(-5deg);
+    }
+    50%,100% {
+      transform: rotate(0deg);
+    }
+    }
+    @-o-keyframes swing {
+    10% {
+      transform: rotate(15deg);
+    }
+    20% {
+      transform: rotate(-10deg);
+    }
+    30% {
+      transform: rotate(5deg);
+    }
+    40% {
+      transform: rotate(-5deg);
+    }
+    50%,100% {
+      transform: rotate(0deg);
+    }
+    }
+    @keyframes swing {
+    10% {
+      transform: rotate(15deg);
+    }
+    20% {
+      transform: rotate(-10deg);
+    }
+    30% {
+      transform: rotate(5deg);
+    }
+    40% {
+      transform: rotate(-5deg);
+    }
+    50%,100% {
+      transform: rotate(0deg);
+    }
+    }
 
 /*
  * Styles for the Score Panel

@@ -49,17 +49,9 @@ function shuffle(array) {
  *    + 增加移动计数器并将其显示在页面上（将这个功能放在你从这个函数中调用的另一个函数中）
  *    + 如果所有卡都匹配，则显示带有最终分数的消息（将这个功能放在你从这个函数中调用的另一个函数中）
  */
- // var container = document.getElementsByClassName('container');
- //
- // var count = 0;
- // var t = document.getElementsByClassName('timer');
- // var timeCount = t[0].getElementsByTagName('span');
- // function timeSum(){
- //   Count += 1;
- //   timeCount[0].textContent = count;
- //   console.log(timeCount[0].textContent);
- // }
 
+//绑定点击事件
+window.onload=function(){
 
  deck.addEventListener('click', function(event){
    var event = event || window.event;
@@ -70,6 +62,29 @@ function shuffle(array) {
    openTheCard(target) ;
    }
  });
+ // 记录鼠标点击次数
+ var clickCount = 0;
+ function clickSum(){
+   clickCount += 1;
+   console.log(clickCount);
+ }
+
+ //计时器
+ var container = document.getElementsByClassName('container');
+ var count = 0;
+ var t = document.getElementsByClassName('timer');
+ var timeCount = t[0].getElementsByTagName('span');
+ function timeBegin(){
+   if(clickCount == 1){
+     setInterval(timeSum, 1000);
+   }
+ }
+ function timeSum(){
+   Count ++;
+   timeCount[0].textContent = count;
+   console.log(timeCount[0].textContent);
+ }
+
  //打开卡片
  function openTheCard(e){
      if(e.className = "card open show"){//一个等号。两个等号无效
@@ -92,11 +107,12 @@ function shuffle(array) {
        wrongCards.push(e, cardsOpened[0].parentNode);
        wrongCard(wrongCards[0],wrongCards[1]);
        wrongCards.splice(0,2);
-       setTimeout(function(){
-         hideCardSymbol(e, cardsOpened[0].parentNode);
-         cardsOpened.splice(0,2);
-       },1000)
      }
+     setTimeout(function(){
+       hideCardSymbol(e, cardsOpened[0].parentNode);
+       cardsOpened.splice(0,2);
+     },800)
+     // 延迟函数对于匹配好的卡片，如果用户快速点击会出现错误
    }else{
      console.log('<2');
    }
@@ -110,8 +126,10 @@ function shuffle(array) {
    y.classList.add('match');
    setTimeout(function(){
      Congratulations(matchedCards);
-   }, 500);
+   }, 100);
  }
+
+ //没有匹配成功的卡片添加和删除样式
  function wrongCard(x,y){
    x.classList.add('nomatch');
    y.classList.add('nomatch');
@@ -119,23 +137,20 @@ function shuffle(array) {
    setTimeout(function(){
      x.classList.remove('nomatch');
      y.classList.remove('nomatch');
-   }, 1000);
+   }, 800);
  }
+
+ //没有匹配成功的卡片去掉open样式
  function hideCardSymbol(x,y){
    x.classList.remove('open','show');
    y.classList.remove('open','show');
  }
 
+//全部卡片匹配成功后弹出的对话框
  function Congratulations(e){
    if(e.length >= 16){
+     clickCount = 0;
      alert("恭喜");
    }
  }
-//计时器
-
-var clickCount = 0;
-//click次数
-function clickSum(){
-  clickCount += 1;
-  console.log(clickCount);
 }
