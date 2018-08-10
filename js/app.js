@@ -18,6 +18,7 @@ var cardsOpened = document.getElementsByClassName('open');
 var cardCheckTwo = []
 var matchedCards = [];
 var wrongCards = [];
+var cardsName = [];
 /*
  * 显示页面上的卡片
  *   - 使用下面提供的 "shuffle" 方法对数组中的卡片进行洗牌
@@ -123,7 +124,7 @@ function addCardToOpenCards(e){
       setTimeout(function(){
         hideCardSymbol(e, cardCheckTwo[0].parentNode);
         cardCheckTwo.splice(0,2);
-      },500)
+      },200)
 // 延迟函数对于匹配好的卡片，如果用户快速点击会出现错误
     }else{
       console.log('<2');
@@ -149,7 +150,7 @@ function wrongCard(x,y){
     setTimeout(function(){
       x.classList.remove('nomatch');
       y.classList.remove('nomatch');
-    }, 500);
+    }, 200);
 }
 
  //没有匹配成功的卡片去掉open样式
@@ -176,7 +177,10 @@ restart.addEventListener(`click`,function(event){
     clearMatchCard();
     matchedCards = [];
     cardCheckTwo = [];
-    //console.log(matchedCards);
+    shuffle(cardPattern);
+    console.log(cardPattern);
+    shuffleCard();
+    clearTimeout(timeSum);
 }
 )
 
@@ -184,14 +188,16 @@ restart.addEventListener(`click`,function(event){
 function clearMatchCard(){
      matchedCards.forEach(function(matchedCard){
        matchedCard.className = "card";
-      //console.log(matchedCard);
     });
 }
 
-// function clearOpenCard(){
-//      cardsOpened.forEach(function(cardOpened){
-//        cardOpened.className = "card";
-//       //console.log(matchedCard);
-//     });
+//function clearOpenCard(){
+       //cardOpened[0].className = "card";
+      //console.log(matchedCard);
+    //}
 // }
+
+function shuffleCard(){
+
+}
 //}
