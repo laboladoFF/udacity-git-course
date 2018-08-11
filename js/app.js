@@ -2,16 +2,6 @@
  * 创建一个包含所有卡片的数组
  */
 //window.onload=function(){
-var cardPattern = [
-  "fa fa-diamond","fa fa-paper-plane-o",
-  "fa fa-anchor","fa fa-bolt",
-  "fa fa-cube","fa fa-anchor",
-  "fa fa-leaf","fa fa-bicycle",
-  "fa fa-diamond","fa fa-bomb",
-  "fa fa-leaf","fa fa-bomb",
-  "fa fa-bolt","fa fa-bicycle",
-  "fa fa-paper-plane-o","fa fa-cube"
-];
 var deck = document.querySelector('.deck');
 var cards = document.getElementsByClassName('card');
 var cardsOpened = document.getElementsByClassName('open');
@@ -73,6 +63,7 @@ function clickSum(){
     console.log(clickCount);
 }
  //计时器
+var t;
 var second = 0;
 var hour = 0;
 var minute = 0;
@@ -80,7 +71,7 @@ var timer = document.getElementsByClassName('timer')[0];
 var timeCount = timer.getElementsByTagName('span')[0];
 function timeBegin(e){
     if(e === 1){
-      setInterval(timeSum, 1000);
+      t = setInterval(timeSum, 1000);
     }
 }
 function timeSum(){
@@ -170,17 +161,18 @@ function Congratulations(e){
 var restart = document.getElementsByClassName('restart')[0];
 restart.addEventListener(`click`,function(event){
     var event = event || window.event;
+    shuffle(cards);
+    console.log(cards);
     second = 0;//重置后显示为1
     hour = 0;
     minute = 0;
     clickCount = 0;
     clearMatchCard();
+    clearTimeout(t);
     matchedCards = [];
     cardCheckTwo = [];
-    shuffle(cardPattern);
-    console.log(cardPattern);
-    shuffleCard();
-    clearTimeout(timeSum);
+    //shuffle(cards);
+    //console.log(cards);
 }
 )
 
@@ -196,8 +188,11 @@ function clearMatchCard(){
       //console.log(matchedCard);
     //}
 // }
-
-function shuffleCard(){
-
-}
+// var allCards = [];
+// function shuffleCard(){
+//     for(let i = 0, i <= cards.length, i++){
+//       allCards.push(cards[i]);
+//       console.log(allca);
+//     }
+// }
 //}
