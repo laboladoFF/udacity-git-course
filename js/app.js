@@ -187,9 +187,10 @@ function hideCardSymbol(x,y){
 function Congratulations(e){
     if(e.length >= 16){
       clearTimeout(t);
-      returnStar();
       alert(`恭喜！
-        ${hour} 时 ${minute} 分 ${second} 秒`);
+        ${hour} 时 ${minute} 分 ${second} 秒
+        共用 ${clickCount} 个招式`
+      );
     }
 }
 
