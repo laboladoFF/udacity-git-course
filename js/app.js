@@ -197,7 +197,8 @@ function Congratulations(e){
 var restart = document.getElementsByClassName('restart')[0];
 restart.addEventListener(`click`,function(event){
     var event = event || window.event;
-    cardCheckTwo[0].parentNode.classList.remove('open','show');
+    console.log(second);
+    checkMatching();
     clearTimeout(t);
     second = 0;//重置后显示为1
     hour = 0;
@@ -211,7 +212,11 @@ restart.addEventListener(`click`,function(event){
     gavePatternName();
 }
 )
-
+function checkMatching(){
+  if(cardCheckTwo.length === 1){
+    cardCheckTwo[0].parentNode.classList.remove('open','show');
+  }
+}
 //去掉所有匹配成功的卡片样式
 function clearMatchCard(){
      matchedCards.forEach(function(matchedCard){
