@@ -2,6 +2,16 @@
  * 创建一个包含所有卡片的数组
  */
 //window.onload=function(){
+var allCardsPatternName = [
+    "fa fa-diamond","fa fa-paper-plane-o",
+    "fa fa-anchor","fa fa-bolt",
+    "fa fa-cube","fa fa-anchor",
+    "fa fa-bomb","fa fa-leaf",
+    "fa fa-bomb","fa fa-bolt",
+    "fa fa-bicycle","fa fa-paper-plane-o",
+    "fa fa-cube","fa fa-leaf"
+];
+
 var deck = document.querySelector('.deck');
 var cards = document.getElementsByClassName('card');
 var cardsOpened = document.getElementsByClassName('open');
@@ -121,9 +131,8 @@ function addCardToOpenCards(e){
       console.log('<2');
     }
 }
- //对children[0],children[1]classname
+
  //对比成功元素添加match，并添加到marchedCards数组中
- //对比失败元素去掉样式open、show
 function addCardToMatchedCards(x,y){
     matchedCards.push(x,y);
     x.classList.add('match');
@@ -161,8 +170,7 @@ function Congratulations(e){
 var restart = document.getElementsByClassName('restart')[0];
 restart.addEventListener(`click`,function(event){
     var event = event || window.event;
-    shuffle(cards);
-    console.log(cards);
+    gavePatternName();
     second = 0;//重置后显示为1
     hour = 0;
     minute = 0;
@@ -171,8 +179,6 @@ restart.addEventListener(`click`,function(event){
     clearTimeout(t);
     matchedCards = [];
     cardCheckTwo = [];
-    //shuffle(cards);
-    //console.log(cards);
 }
 )
 
@@ -183,16 +189,20 @@ function clearMatchCard(){
     });
 }
 
-//function clearOpenCard(){
-       //cardOpened[0].className = "card";
-      //console.log(matchedCard);
-    //}
-// }
-// var allCards = [];
-// function shuffleCard(){
-//     for(let i = 0, i <= cards.length, i++){
-//       allCards.push(cards[i]);
-//       console.log(allca);
-//     }
-// }
+//获取所有I元素
+var allCards = [];
+function getAllCards(){
+    for(let i = 0; i < cards.length; i++){
+      allCards.push(cards[i].getElementsByTagName('i')[0]);
+    }
+}
+
+//分别给I元素class
+function gavePatternName(){
+    getAllCards();
+    shuffle(allCardsPatternName);
+    for(let i = 0; i < cards.length; i++){
+      allCards[i].className = allCardsPatternName[i];
+    }
+}
 //}
