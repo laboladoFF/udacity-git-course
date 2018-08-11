@@ -59,7 +59,7 @@ function shuffle(array) {
 deck.addEventListener('click', function(event){
     var event = event || window.event;
     var target = event.target || event.srcElement;
-    console.log('o');
+    //console.log('o');
     clickSum();
     if(target.className.toLowerCase() == 'card'){
       openTheCard(target) ;
@@ -70,7 +70,7 @@ var clickCount = 0;
 function clickSum(){
     clickCount ++;
     timeBegin(clickCount);
-    console.log(clickCount);
+    //console.log(clickCount);
 }
  //计时器
 var t;
@@ -82,10 +82,12 @@ var timeCount = timer.getElementsByTagName('span')[0];
 function timeBegin(e){
     if(e === 1){
       t = setInterval(timeSum, 1000);
+      console.log(second);//second始终为0
     }
 }
 function timeSum(){
     second ++;
+    scoreTime(second);
       if(second >= 60){
         second = 0;
         minute += 1;
@@ -98,10 +100,35 @@ function timeSum(){
     return;
   }
 
+  //去掉星星
+var stars = document.getElementsByClassName('stars')[0];
+var star = stars.getElementsByTagName('li');
+function scoreTime(e){
+    // if(e > 5){
+    //   star[2].style.display = 'none';
+    // }else if(e > 50){
+    //   star[1].style.display = 'none';
+    // }
+    console.log(e);
+    switch(e){
+      case 10:
+        star[2].style.display = 'none';
+        break;
+      case 59:
+        star[1].style.display = 'none';
+        break;
+    }
+}
+//恢复星星个数
+function returnStar(){
+  star[2].style.display = 'inline-block';
+  star[1].style.display = 'inline-block';
+}
+
  //打开卡片
 function openTheCard(e){
     if(e.className = "card open show"){//一个等号。两个等号无效
-      addCardToOpenCards(e)
+      addCardToOpenCards(e)//为什么加 ；就出错
     }else{
       e.classList.add('open','show');
     }
@@ -114,10 +141,10 @@ function addCardToOpenCards(e){
      //通过点击e获取i元素，与cardCheckTwo【】元素进行对比
     if(cardCheckTwo.length >= 2){
       if(cardCheckTwo[0].className == iCard.className){
-        console.log('match');
+        //console.log('match');
         addCardToMatchedCards(e, cardCheckTwo[0].parentNode);
       }else{
-        console.log('nomatch');
+        //console.log('nomatch');
         wrongCards.push(e, cardCheckTwo[0].parentNode);
         wrongCard(wrongCards[0],wrongCards[1]);
         wrongCards.splice(0,2);
@@ -127,8 +154,6 @@ function addCardToOpenCards(e){
         cardCheckTwo.splice(0,2);
       },200)
 // 延迟函数对于匹配好的卡片，如果用户快速点击会出现错误
-    }else{
-      console.log('<2');
     }
 }
 
@@ -146,7 +171,7 @@ function addCardToMatchedCards(x,y){
 function wrongCard(x,y){
     x.classList.add('nomatch');
     y.classList.add('nomatch');
-    console.log(x,y);
+    //console.log(x,y);
     setTimeout(function(){
       x.classList.remove('nomatch');
       y.classList.remove('nomatch');
@@ -162,7 +187,10 @@ function hideCardSymbol(x,y){
 //全部卡片匹配成功后弹出的对话框
 function Congratulations(e){
     if(e.length >= 16){
-      alert("恭喜");
+      clearTimeout(t);
+      returnStar();
+      alert(`恭喜！
+        ${hour} 时 ${minute} 分 ${second} 秒`);
     }
 }
 
@@ -170,15 +198,17 @@ function Congratulations(e){
 var restart = document.getElementsByClassName('restart')[0];
 restart.addEventListener(`click`,function(event){
     var event = event || window.event;
-    gavePatternName();
+    clearTimeout(t);
     second = 0;//重置后显示为1
     hour = 0;
     minute = 0;
+    timeCount.textContent =`${hour} 时 ${minute} 分 ${second} 秒`;
     clickCount = 0;
+    returnStar();
     clearMatchCard();
-    clearTimeout(t);
     matchedCards = [];
     cardCheckTwo = [];
+    gavePatternName();
 }
 )
 
