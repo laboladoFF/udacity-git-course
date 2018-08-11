@@ -14,7 +14,6 @@ var allCardsPatternName = [
 
 var deck = document.querySelector('.deck');
 var cards = document.getElementsByClassName('card');
-var cardsOpened = document.getElementsByClassName('open');
 var cardCheckTwo = []
 var matchedCards = [];
 var wrongCards = [];
@@ -198,6 +197,7 @@ function Congratulations(e){
 var restart = document.getElementsByClassName('restart')[0];
 restart.addEventListener(`click`,function(event){
     var event = event || window.event;
+    cardCheckTwo[0].parentNode.classList.remove('open','show');
     clearTimeout(t);
     second = 0;//重置后显示为1
     hour = 0;
