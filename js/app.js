@@ -197,7 +197,7 @@ function getAllCards(){
     }
 }
 
-//分别给I元素class
+//分别给I元素
 function gavePatternName(){
     getAllCards();
     shuffle(allCardsPatternName);
