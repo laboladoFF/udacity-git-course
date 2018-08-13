@@ -58,8 +58,8 @@ var solved = false;
 deck.addEventListener('click', function(event){
     var event = event || window.event;
     var target = event.target || event.srcElement;
-    solved = true;
     clickSum();
+    checkOneClick();
     if(target.className.toLowerCase() == 'card'){
       openTheCard(target) ;
     }
@@ -78,15 +78,19 @@ var hour = 0;
 var minute = 0;
 var timer = document.getElementsByClassName('timer')[0];
 var timeCount = timer.getElementsByTagName('span')[0];
-function timeBegin(){
-    if(solved){
+
+//第一次点击后执行计时器
+var oneClick = 0;
+function checkOneClick(){
+  oneClick ++;
+  timeBegin(oneClick);
+}
+
+function timeBegin(e){
+   if(e === 1){
       t = setInterval(timeSum, 1000);
       console.log(second);//second始终为0
     }
-    // if(e === 1){
-    //   t = setInterval(timeSum, 1000);
-    //   console.log(second);//second始终为0
-    // }
 }
 
 function timeSum(){
@@ -103,10 +107,6 @@ function timeSum(){
     timeCount.textContent =`${hour} 时 ${minute} 分 ${second} 秒`;
     return;
   }
-  //第一次点击后执行计时器
-function oneClick(){
-
-}
 
   //去掉星星
 var stars = document.getElementsByClassName('stars')[0];
@@ -210,6 +210,7 @@ restart.addEventListener(`click`,function(event){
     console.log(second);
     checkMatching();
     clearTimeout(t);
+    oneClick = 0;
     second = 0;//重置后显示为1
     hour = 0;
     minute = 0;
