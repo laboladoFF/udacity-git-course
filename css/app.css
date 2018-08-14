@@ -198,7 +198,7 @@ h1 {
 
 
 /*
- * 对话框 
+ * 对话框
  */
 
 .modalbg {
@@ -212,6 +212,18 @@ h1 {
   .transition-delay(.2s);
 	display: block;
 	pointer-events: none;
+}
+.modalbg:target {
+	display: block;
+	pointer-events: auto;
+  z-index: 9999;
+  background: rgba(4, 10 ,30, .8);
+  .transition();
+}
+
+.spanAlert{
+  display: block;
+  margin: 0 auto;
 }
 
 .replay{
