@@ -192,14 +192,18 @@ function hideCardSymbol(x,y){
     y.classList.remove('open','show');
 }
 
-//全部卡片匹配成功后弹出的对话框
+//全部卡片匹配成功后弹出的对话框 z-Index实现
+var spanAlert = document.getElementsByClassName('spanAlert')[0];
 function Congratulations(e){
     if(e.length >= 16){
       clearTimeout(t);
-      alert(`恭喜！
-        ${hour} 时 ${minute} 分 ${second} 秒
-        共用 ${clickCount} 个招式`
-      );
+      //window.location.href = "jumpscore.html";
+      // alert(`恭喜！
+      //  ${hour} 时 ${minute} 分 ${second} 秒
+      //   共用 ${clickCount} 个招式`
+      // );
+      spanAlert.textContent = `${hour} 时 ${minute} 分 ${second} 秒
+                                    共用 ${clickCount} 个招式`
     }
 }
 
