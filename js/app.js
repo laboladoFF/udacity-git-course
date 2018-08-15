@@ -1,7 +1,7 @@
 /*
  * 创建一个包含所有卡片的数组
  */
-//window.onload=function(){
+window.onload=function(){
 var allCardsPatternName = [
     "fa fa-diamond","fa fa-paper-plane-o",
     "fa fa-anchor","fa fa-bolt",
@@ -64,13 +64,14 @@ deck.addEventListener('click', function(event){
       openTheCard(target) ;
     }
 });
+
  // 记录鼠标点击次数
 var clickCount = 0;
 function clickSum(){
     clickCount ++;
-    //timeBegin(e);
-    //timeBegin(clickCount);
 }
+
+
  //计时器
 var t;
 var second = 0;
@@ -95,7 +96,6 @@ function timeBegin(e){
 
 function timeSum(){
     second ++;
-    scoreTime(second);
       if(second >= 60){
         second = 0;
         minute += 1;
@@ -108,21 +108,15 @@ function timeSum(){
     return;
   }
 
-  //去掉星星
+//去掉星星
 var stars = document.getElementsByClassName('stars')[0];
 var star = stars.getElementsByTagName('li');
-function scoreTime(e){
-    // if(e > 5){
-    //   star[2].style.display = 'none';
-    // }else if(e > 50){
-    //   star[1].style.display = 'none';
-    // }
-    console.log(e);
+function scoreMove(e){
     switch(e){
-      case 10:
+      case 8:
         star[2].style.display = 'none';
         break;
-      case 59:
+      case 12:
         star[1].style.display = 'none';
         break;
     }
@@ -143,11 +137,16 @@ function openTheCard(e){
 }
 
  //建立打开卡片组&检查图案是否一致
+var move = 0;
+var moves = document.getElementsByClassName('moves')[0];
 function addCardToOpenCards(e){
     cardCheckTwo.push(e.children[0]);
     var iCard = e.getElementsByTagName('i')[0];
-     //通过点击e获取i元素，与cardCheckTwo【】元素进行对比
     if(cardCheckTwo.length >= 2){
+      //记录moves
+      move ++;
+      moves.textContent = `${move}`;
+      scoreMove(move);
       if(cardCheckTwo[0].className == iCard.className){
         //console.log('match');
         addCardToMatchedCards(e, cardCheckTwo[0].parentNode);
@@ -193,25 +192,38 @@ function hideCardSymbol(x,y){
 }
 
 //全部卡片匹配成功后弹出的对话框 z-Index实现
+var modalbg = document.getElementsByClassName('modalbg')[0];
 var spanAlert = document.getElementsByClassName('spanAlert')[0];
+// var replay = document.getElementById('replay');
 function Congratulations(e){
     if(e.length >= 16){
       clearTimeout(t);
       //window.location.href = "jumpscore.html";
-      // alert(`恭喜！
-      //  ${hour} 时 ${minute} 分 ${second} 秒
-      //   共用 ${clickCount} 个招式`
-      // );
-      spanAlert.textContent = `${hour} 时 ${minute} 分 ${second} 秒
-                                    共用 ${clickCount} 个招式`
+      modalbg.classList.add('modalbgShow');
+      spanAlert.textContent = `${hour} 时 ${minute} 分 ${second} 秒 共用 ${move} 个招式`
     }
 }
+
+// replay.addEventListener('click', function(event){
+//     var event = event || window.event;
+//     checkMatching();
+//     clearTimeout(t);
+//     oneClick = 0;
+//     second = 0;//重置后显示为1
+//     hour = 0;
+//     minute = 0;
+//     clickCount = 0;
+//     returnStar();
+//     clearMatchCard();
+//     matchedCards = [];
+//     cardCheckTwo = [];
+//     gavePatternName();
+// })
 
 //重置
 var restart = document.getElementsByClassName('restart')[0];
 restart.addEventListener(`click`,function(event){
     var event = event || window.event;
-    console.log(second);
     checkMatching();
     clearTimeout(t);
     oneClick = 0;
@@ -225,8 +237,8 @@ restart.addEventListener(`click`,function(event){
     matchedCards = [];
     cardCheckTwo = [];
     gavePatternName();
-}
-)
+})
+
 function checkMatching(){
   if(cardCheckTwo.length === 1){
     cardCheckTwo[0].parentNode.classList.remove('open','show');
@@ -255,4 +267,4 @@ function gavePatternName(){
       allCards[i].className = allCardsPatternName[i];
     }
 }
-//}
+}
