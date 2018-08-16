@@ -146,7 +146,7 @@ function addCardToOpenCards(e){
       //记录moves
       move ++;
       moves.textContent = `${move}`;
-      scoreMove(move);
+      scoreMove(move)
       if(cardCheckTwo[0].className == iCard.className){
         //console.log('match');
         addCardToMatchedCards(e, cardCheckTwo[0].parentNode);
